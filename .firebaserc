@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "buisnessapp-70f8c": {
+      "hosting": {
+        "buisness_app": [
+          "buisnessapp-70f8c"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "buisnessapp-70f8c"
+  }
+}

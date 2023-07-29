@@ -1,7 +1,7 @@
 <mat-drawer-container class="mat-drawer-container" autosize>
   <mat-drawer #drawer class="sidenav" [opened]="true" mode="side">
     <div class="logo-container">
-      <p>Logo</p>
+      <p><img class="logo" src="./assets/img/logo.png" /></p>
     </div>
     <mat-nav-list>
       <a mat-list-item routerLink="dashboard">
@@ -26,6 +26,15 @@
         <mat-icon class="menu-icon" (click)="drawer.toggle()"> menu</mat-icon>
 
         <span>Simple Buisness App</span>
+        <div>
+          <a mat-button [routerLink]="'/accounts'"> Accounts </a>
+          <a mat-button [routerLink]="'/create-account'"> Create Account </a>
+          <a mat-button [routerLink]="'/contacts'"> Contacts </a>
+          <a mat-button [routerLink]="'/create-contact'"> Create Contact </a>
+          <a mat-button [routerLink]="'/activities'"> Activities </a>
+          <a mat-button [routerLink]="'/create-activity'"> Create Activity </a>
+          <button mat-button routerLink="/">Home</button>
+        </div>
       </mat-toolbar-row>
     </mat-toolbar>
   </div>

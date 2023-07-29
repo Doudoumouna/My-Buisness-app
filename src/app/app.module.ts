@@ -21,12 +21,15 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { FormsModule } from '@angular/forms';
 import { environment } from 'src/environments/environment';
-import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
-import { FirestoreModule } from '@angular/fire/firestore/';
-import { provideFirestore, getFirestore } from '@angular/fire/firestore';
-import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
-import { provideAuth, getAuth } from '@angular/fire/auth';
-import { provideDatabase, getDatabase } from '@angular/fire/database';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { initializeApp } from 'firebase/app';
+import { getFirestore } from 'firebase/firestore';
+import { provideFirebaseApp, getApp } from '@angular/fire/app';
+import {
+  provideFirestore,
+  getFirestore as getAngularFirestore,
+} from '@angular/fire/firestore';
+import { MatCardModule } from '@angular/material/card';
 
 @NgModule({
   declarations: [
@@ -52,12 +55,11 @@ import { provideDatabase, getDatabase } from '@angular/fire/database';
     MatDatepickerModule,
     MatNativeDateModule,
     FormsModule,
-    FirestoreModule,
+
     provideFirebaseApp(() => initializeApp(environment.firebase)),
-    AngularFirestoreModule,
-    provideAuth(() => getAuth()),
-    provideDatabase(() => getDatabase()),
     provideFirestore(() => getFirestore()),
+    MatProgressBarModule,
+    MatCardModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from 'src/models/user.class';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { Firestore, collection, addDoc } from '@angular/fire/firestore';
 import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
@@ -15,20 +15,21 @@ export class DialogAddUserComponent implements OnInit {
 
   constructor(
     public dialogRef: MatDialogRef<DialogAddUserComponent>,
-    private firestore: AngularFirestore
+    private firestore: Firestore
   ) {}
 
   ngOnInit(): void {}
 
-  saveUser() {
+  async saveUser() {
     this.user.birthDate = this.birthDate.getTime();
     this.loading = true;
-    this.firestore
-      .collection('users')
-      .add(this.user.toJSON())
-      .then((result: any) => {
-        this.loading = false;
-        this.dialogRef.close();
-      });
+    try {
+      await addDoc(collection(this.firestore, 'user'), this.user.toJSON());
+      this.loading = false;
+      this.dialogRef.close();
+    } catch (e) {
+      console.error('Error adding document: ', e);
+      this.loading = false;
+    }
   }
 }

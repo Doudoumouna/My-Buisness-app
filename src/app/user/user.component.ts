@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogAddUserComponent } from '../dialog-add-user/dialog-add-user.component';
 import { User } from 'src/models/user.class';
-import { Firestore } from '@angular/fire/firestore'; // Corrected import
+import { Firestore, collection, collectionData } from '@angular/fire/firestore'; // Corrected import
 
 @Component({
   selector: 'app-user',
@@ -15,12 +15,17 @@ export class UserComponent implements OnInit {
   constructor(public dialog: MatDialog, private firestore: Firestore) {} // Updated 'Firestore' to 'AngularFirestore'
 
   ngOnInit(): void {
-    this.firestore
-      .collection('users')
-      .valueChanges()
-      .subscribe((changes: any) => {
-        console.log('Receive changes from DB', changes);
-      });
+    // this.firestore
+    //   .collection('users')
+    //   .valueChanges()
+    //   .subscribe((changes: any) => {
+    //     console.log('Receive changes from DB', changes);
+    //   });
+
+    const collRef = collection(this.firestore, 'users');
+    collectionData(collRef).subscribe((changes) =>
+      console.log('Receive changes from DB', changes)
+    );
   }
 
   openDialog(): void {
